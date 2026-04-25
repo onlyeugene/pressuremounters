@@ -1,0 +1,223 @@
+:root {
+  --font-main: 'Poppins', sans-serif;
+  --bg-color: #ffffff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #4a4a4a;
+  --accent-color: #000000;
+  --gray-light: #f5f5f5;
+  --spacing-lg: 120px;
+  --spacing-md: 60px;
+  --spacing-sm: 24px;
+}
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  line-height: 1.5;
+  color: var(--text-primary);
+  background-color: var(--bg-color);
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  width: 100%;
+}
+
+/* Header */
+.main-header {
+  height: 80px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 100;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.logo-circle {
+  width: 32px;
+  height: 32px;
+  background: black;
+  border-radius: 50%;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: opacity 0.2s;
+}
+
+.nav-links a:hover {
+  opacity: 0.6;
+}
+
+.nav-links a.active {
+  font-weight: 700;
+}
+
+/* Hero Section */
+.hero {
+  padding: var(--spacing-lg) 0;
+  background: var(--gray-light);
+  width: 100%;
+}
+
+.hero-content {
+  max-width: 900px;
+  margin: 0 auto; /* Center the hero content box */
+  text-align: center; /* Center the text inside */
+}
+
+.hero h1 {
+  font-size: clamp(3rem, 6vw, 3rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 40px;
+}
+
+.hero p {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  max-width: 700px;
+}
+
+/* Featured Projects Section */
+.projects-section {
+  padding: var(--spacing-lg) 0;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 48px;
+  text-align: start; /* Center section titles too */
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Image Container */
+.image-container {
+  aspect-ratio: 16 / 10;
+  background: var(--gray-light);
+  border-radius: 0; /* Wix template has sharp corners for these cards */
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%; /* Shift up slightly to show faces better in portraits */
+  transition: transform 0.6s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.project-card:hover img {
+  transform: scale(1.05);
+}
+
+.project-info h3 {
+  font-size: 2.5rem;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.project-info p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.project-meta {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.project-meta span {
+  background: var(--gray-light);
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+
+/* Prayer Info Banner (Subtle Integration) */
+.prayer-banner {
+  background: #000;
+  color: white;
+  text-align: center;
+  padding: 12px 0;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+/* Footer */
+.footer {
+  padding: 80px 0 40px;
+  border-top: 1px solid var(--gray-light);
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .hero h1 {
+    font-size: 3.5rem;
+  }
+  
+  .container {
+    padding: 0 24px;
+  }
+}
