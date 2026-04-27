@@ -1,5 +1,5 @@
 :root {
-  --font-main: 'Poppins', sans-serif;
+  --font-main: "Poppins", sans-serif;
   --bg-color: #ffffff;
   --text-primary: #1a1a1a;
   --text-secondary: #4a4a4a;
@@ -212,11 +212,11 @@ body {
   .projects-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .hero h1 {
     font-size: 3.5rem;
   }
-  
+
   .container {
     padding: 0 24px;
   }
