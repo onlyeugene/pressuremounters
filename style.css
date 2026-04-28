@@ -138,7 +138,7 @@ body {
 
 /* Image Container */
 .image-container {
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 3 / 4;
   background: var(--gray-light);
   border-radius: 0; /* Wix template has sharp corners for these cards */
   overflow: hidden;
@@ -152,7 +152,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 20%; /* Shift up slightly to show faces better in portraits */
+  object-position: center top; /* Focus on faces for portrait photos */
   transition: transform 0.6s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
