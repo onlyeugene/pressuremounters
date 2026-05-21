@@ -9,7 +9,13 @@ async function fetchMembers() {
   const container = document.getElementById('members-grid');
   
   // Show a loading message while fetching
-  container.innerHTML = '<p style="text-align: center; width: 100%;">Loading members...</p>';
+  container.innerHTML = `
+    <div style="text-align: center; width: 100%; padding: 4rem 1rem; color: #666; grid-column: 1 / -1;">
+      <div style="display: inline-block; width: 40px; height: 40px; border: 3px solid rgba(0,0,0,0.1); border-radius: 50%; border-top-color: #333; animation: spin 1s ease-in-out infinite; margin-bottom: 1rem;"></div>
+      <p style="font-weight: 500; font-size: 1.1rem;">Loading members...</p>
+      <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
+    </div>
+  `;
 
   try {
     const response = await fetch(API_URL);
@@ -23,7 +29,13 @@ async function fetchMembers() {
 
     // If no members are found
     if (!data.items || data.items.length === 0) {
-       container.innerHTML = '<p style="text-align: center; width: 100%;">No members found. Please add members in Contentful.</p>';
+       container.innerHTML = `
+         <div style="text-align: center; width: 100%; padding: 4rem 1rem; background: #f8f9fa; border-radius: 12px; grid-column: 1 / -1;">
+           <span style="font-size: 3rem; margin-bottom: 1rem; display: block;">👥</span>
+           <h3 style="color: #333; margin-bottom: 0.5rem; font-size: 1.5rem;">No Members Yet</h3>
+           <p style="color: #666;">Please add some members in your Contentful dashboard to see them here.</p>
+         </div>
+       `;
        return;
     }
 
@@ -76,7 +88,15 @@ async function fetchMembers() {
 
   } catch (error) {
     console.error('Error fetching members from Contentful:', error);
-    container.innerHTML = '<p style="text-align: center; width: 100%; color: red;">Failed to load members. Please check your API keys or internet connection.</p>';
+    container.innerHTML = `
+      <div style="text-align: center; width: 100%; padding: 3rem 1rem; background: #fff5f5; border: 1px solid #fc8181; border-radius: 12px; grid-column: 1 / -1; margin-top: 1rem;">
+        <svg style="width: 48px; height: 48px; margin: 0 auto 1rem; color: #f56565;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <h3 style="margin-bottom: 0.5rem; color: #c53030; font-size: 1.25rem;">Oops! We couldn't load the members.</h3>
+        <p style="color: #c53030; opacity: 0.9;">There was a problem connecting to Contentful. Please double-check your API keys or your internet connection.</p>
+      </div>
+    `;
   }
 }
 
