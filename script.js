@@ -10,20 +10,57 @@ const API_URL = `https://preview.contentful.com/spaces/${SPACE_ID}/environments/
  * Given a date string (YYYY-MM-DD or similar), return how many days until the
  * NEXT occurrence of that birthday (0 = today, negative = already passed this year).
  */
-function daysUntilNextBirthday(dobString) {
+/**
+ * Parse a birthday string in any of these formats:
+ *   "January 12th", "12th January", "Jan 12", "1995-08-12", "August 12, 1995"
+ * Returns a { month, day } object (0-indexed month), or null if unparseable.
+ */
+function parseBirthday(dobString) {
   if (!dobString) return null;
-  const dob = new Date(dobString);
-  if (isNaN(dob)) return null;
+
+  const MONTHS = {
+    january:0, february:1, march:2, april:3, may:4, june:5,
+    july:6, august:7, september:8, october:9, november:10, december:11,
+    jan:0, feb:1, mar:2, apr:3, jun:5, jul:6, aug:7,
+    sep:8, sept:8, oct:9, nov:10, dec:11
+  };
+
+  // Strip ordinal suffixes: 12th → 12, 1st → 1, 3rd → 3
+  const clean = dobString.replace(/(\d+)(st|nd|rd|th)/gi, '$1').trim();
+
+  // Try native Date parse first (handles ISO and "Month Day, Year")
+  const native = new Date(clean);
+  if (!isNaN(native)) {
+    return { month: native.getMonth(), day: native.getDate() };
+  }
+
+  // Try "Month Day" or "Day Month" (no year)
+  const parts = clean.split(/[\s,]+/).filter(Boolean);
+  let month = null, day = null;
+
+  for (const part of parts) {
+    const asNum = parseInt(part, 10);
+    if (!isNaN(asNum) && asNum >= 1 && asNum <= 31) {
+      day = asNum;
+    } else if (MONTHS[part.toLowerCase()] !== undefined) {
+      month = MONTHS[part.toLowerCase()];
+    }
+  }
+
+  if (month !== null && day !== null) return { month, day };
+  return null;
+}
+
+function daysUntilNextBirthday(dobString) {
+  const parsed = parseBirthday(dobString);
+  if (!parsed) return null;
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  // Next birthday this year
-  let next = new Date(today.getFullYear(), dob.getMonth(), dob.getDate());
-
-  // If it's already passed this year, use next year
+  let next = new Date(today.getFullYear(), parsed.month, parsed.day);
   if (next < today) {
-    next = new Date(today.getFullYear() + 1, dob.getMonth(), dob.getDate());
+    next = new Date(today.getFullYear() + 1, parsed.month, parsed.day);
   }
 
   return Math.round((next - today) / (1000 * 60 * 60 * 24));
@@ -34,13 +71,13 @@ function daysUntilNextBirthday(dobString) {
  * Recurs yearly. Reminder set 1 day before.
  */
 function buildGCalUrl(name, dobString) {
-  const dob = new Date(dobString);
+  const parsed = parseBirthday(dobString);
+  if (!parsed) return '#';
   const year = new Date().getFullYear();
 
-  // If birthday already passed this year, schedule for next year
-  let eventDate = new Date(year, dob.getMonth(), dob.getDate());
+  let eventDate = new Date(year, parsed.month, parsed.day);
   if (eventDate < new Date()) {
-    eventDate = new Date(year + 1, dob.getMonth(), dob.getDate());
+    eventDate = new Date(year + 1, parsed.month, parsed.day);
   }
 
   const pad = (n) => String(n).padStart(2, '0');
@@ -132,8 +169,9 @@ async function fetchMembers() {
       // Format display date (e.g. "12 August")
       let birthdayDisplay = 'Unknown Birthday';
       if (birthday) {
-        const d = new Date(birthday);
-        if (!isNaN(d)) {
+        const parsed = parseBirthday(birthday);
+        if (parsed) {
+          const d = new Date(2000, parsed.month, parsed.day);
           birthdayDisplay = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long' });
         }
       }
@@ -198,8 +236,9 @@ function renderUpcomingBirthdaysBanner(members) {
         <ul class="birthday-list">
           ${members.map(m => {
             const days = daysUntilNextBirthday(m.birthday);
-            const d = new Date(m.birthday);
-            const dateStr = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long' });
+            const p = parseBirthday(m.birthday);
+            const d = p ? new Date(2000, p.month, p.day) : null;
+            const dateStr = d ? d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long' }) : m.birthday;
             const daysLabel = days === 0 ? 'Today!' : days === 1 ? 'Tomorrow' : `in ${days} days`;
             return `
               <li>
