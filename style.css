@@ -222,3 +222,115 @@ body {
     padding: 0 24px;
   }
 }
+/* ─── Paste these styles into your existing style.css ─────────────────────── */
+
+/* Birthday badge on each card */
+.birthday-badge {
+  display: inline-block;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.02em;
+}
+
+/* "Add to Calendar" link inside each card's meta row */
+.gcal-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #2b6cb0;
+  text-decoration: none;
+  background: #ebf8ff;
+  border: 1px solid #bee3f8;
+  border-radius: 6px;
+  padding: 0.2rem 0.55rem;
+  transition: background 0.15s, color 0.15s;
+}
+.gcal-link:hover {
+  background: #2b6cb0;
+  color: #fff;
+  border-color: #2b6cb0;
+}
+
+/* ─── Upcoming Birthdays Banner ─────────────────────────────────────────── */
+
+#birthday-banner {
+  margin-bottom: 2rem;
+}
+
+.birthday-banner-inner {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border: 1px solid #f6d860;
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(246, 173, 85, 0.15);
+}
+
+.birthday-banner-icon {
+  font-size: 2.25rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.birthday-banner-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.birthday-banner-text strong {
+  display: block;
+  font-size: 1rem;
+  color: #744210;
+  margin-bottom: 0.75rem;
+}
+
+.birthday-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.birthday-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #5f4b0a;
+}
+
+.birthday-list li em {
+  opacity: 0.75;
+}
+
+.banner-gcal-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  background: #d69e2e;
+  border: none;
+  border-radius: 7px;
+  padding: 0.3rem 0.75rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s, transform 0.1s;
+}
+.banner-gcal-btn:hover {
+  background: #b7791f;
+  transform: translateY(-1px);
+}
