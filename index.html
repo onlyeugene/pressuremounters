@@ -3,61 +3,66 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pressure Mounting Prayer Group | ONE FAITH</title>
+    <title>Pressure Mounters Prayer Group | ONE FAITH</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <!-- Subtle Prayer Banner -->
+
+    <!-- Prayer Times Banner -->
     <div class="prayer-banner">
-      🕊️ PRAYER TIMES: MONDAYS AND FRIDAYS 11:59PM-1AM WAT (NIGERIAN TIME)
+      ✦ &nbsp; Prayer Times: Mondays &amp; Fridays &nbsp;·&nbsp; 11:59 PM – 1:00 AM WAT (Nigerian Time) &nbsp; ✦
     </div>
 
+    <!-- Header -->
     <header class="main-header container">
       <div class="logo-section">
-        <!-- <div class=""> -->
-        <img class="logo-circle" src="assets/logo.jpg" alt="" />
-        <!-- </div> -->
-        <span>PRESSURE MOUNTERS PRAYER GROUP</span>
+        <img class="logo-circle" src="assets/logo.jpg" alt="One Faith Logo" />
+        <span>Pressure Mounters</span>
       </div>
     </header>
 
     <main>
-      <!-- Hero Section -->
+
+      <!-- Hero -->
       <section class="hero">
         <div class="container hero-content">
-          <h1>PRESSURE MOUNTERS PRAYER GROUP</h1>
-          <p >
-            "For where two or three gather in my name, there am I with them." —
-            Matthew 18:20
+          <div class="hero-eyebrow">Prayer&nbsp;·&nbsp; Purpose&nbsp;·&nbsp; Community</div>
+          <h1>Pressure <em>Mounters</em><br>Prayer Group</h1>
+          <p class="hero-verse">
+            "For where two or three gather in my name,<br>there am I with them."
+            <cite>— Matthew 18:20</cite>
           </p>
         </div>
       </section>
 
-      <!-- Members Section -->
+      <!-- Members -->
       <section class="projects-section container">
-        <h2 class="section-title">Members</h2>
+        <div class="section-header">
+          <h2 class="section-title">Our <em>Members</em></h2>
+          <span class="section-count" id="member-count"></span>
+        </div>
         <div class="projects-grid" id="members-grid">
-          <!-- Members will be dynamically loaded here by script.js -->
+          <!-- Dynamically populated by script.js -->
         </div>
       </section>
+
     </main>
 
     <footer class="footer container">
       <p>
-        &copy; <span id="current-year"></span> Pressure Mounting Prayer Group.
+        &copy; <span id="current-year"></span>
+        <span class="footer-cross">✦</span>
+        Pressure Mounters Prayer Group
+        <span class="footer-cross">✦</span>
         One Faith. All Rights Reserved.
       </p>
     </footer>
 
     <script>
-      document.getElementById("current-year").textContent =
-        new Date().getFullYear();
+      document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
     <script src="./script.js"></script>
   </body>
